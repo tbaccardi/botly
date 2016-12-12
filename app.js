@@ -36,7 +36,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/users', api);
-app.use('/', index);
+app.use('*', index);
 
 // This was left in this file due to some issues making authentication work with Router
 app.post('/login', function(req, res, next) {

@@ -10,6 +10,11 @@
                 token: ''
             }
 
+            var clearAuthData = function() {
+                authFactory.authData.username = '';
+                authFactory.authData.token = '';
+            }
+
             authFactory.authenticate = function(loginData) {
                 var deferred = $q.defer();
                 $http.post('http://localhost:3000/login', loginData).success(function(response) {
@@ -28,6 +33,11 @@
             authFactory.verify = function() {
                 var creds = localStorageService.get('AuthorizationData');
                 return creds;
+            }
+
+            authFactory.deauthenticate = function() {
+                localStorageService.remove('AuthorizationData');
+                clearAuthData();
             }
 
             return authFactory;
