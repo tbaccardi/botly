@@ -14,7 +14,7 @@ var config = require('./config/config');
 mongoose.connect(config.database);
 
 var User = require('./models/user-model');
-    
+
 var app = express();
 
 var index = require('./routes/index.js');
@@ -43,10 +43,11 @@ app.post('/login', function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
         if (err) { return next(err); }
         if (!user) { return res.status('401').json(info); }
-        
+
         var token = user.generateJWT();
-        
+
         return res.json({
+            "user": user.username,
             "token": token
         })
 
@@ -54,20 +55,20 @@ app.post('/login', function(req, res, next) {
 });
 
 var Burns = new User({
-    
+
     username: 'tbaccardi',
     password: 'Password()'
-    
+
 })
 
 User.findOne({username: Burns.username}, function(err, user) {
     if(!user) {
         Burns.save(function(err) {
             if(err) throw err;
-    
+
             console.log('new user added');
         })
-    }      
+    }
 })
 
 // catch 404 and forward to error handler

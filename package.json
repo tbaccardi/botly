@@ -8,7 +8,7 @@
   "dependencies": {
     "angular": "^1.5.9",
     "angular-animate": "^1.5.9",
-    "angular-aria": "^1.5.9",
+    "angular-aria": "^1.6.0",
     "angular-local-storage": "^0.5.0",
     "angular-material": "^1.1.1",
     "angular-ui-router": "^0.3.2",
@@ -20,6 +20,7 @@
     "ejs": "^2.5.3",
     "express": "~4.14.0",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^7.2.1",
     "mongoose": "^4.7.1",
     "morgan": "~1.7.0",
     "passport": "^0.3.2",
