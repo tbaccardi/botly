@@ -8,7 +8,7 @@
 
             if(toState.authRequired === true) {
                 var creds = authFactory.verify('AuthorizationData');
-                if(!!!creds.token) {
+                if(!!!creds || !!!creds.token) {
                     event.preventDefault();
                     $state.go('login');
                 }
