@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var cors = require('cors');
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -16,6 +18,8 @@ mongoose.connect(config.database);
 var User = require('./models/user-model');
 
 var app = express();
+
+app.options('*', cors()); // include before other routes
 
 var index = require('./routes/index.js');
 var api = require('./routes/api.js');
@@ -39,7 +43,7 @@ app.use('/api/users', api);
 app.use('/', index);
 
 // This was left in this file due to some issues making authentication work with Router
-app.post('/login', function(req, res, next) {
+app.post('/login', cors(), function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
         if (err) { return next(err); }
         if (!user) { return res.status('401').json(info); }

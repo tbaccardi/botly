@@ -5,14 +5,14 @@
 
     .run(function($rootScope, authFactory, $state) {
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-            
-            if(toState.authRequired === true) { 
+
+            if(toState.authRequired === true) {
                 var creds = authFactory.verify('AuthorizationData');
-                if(!creds.token) {
+                if(!!!creds.token) {
                     event.preventDefault();
                     $state.go('login');
                 }
-                       
+
                 else {
                     console.log(creds.token);
                 }
@@ -42,7 +42,7 @@
 
     // Move to loginController.js
 
-    // .factory('authFactory', 
+    // .factory('authFactory',
     //     function(localStorageService) {
 
     //         var authFactory = {};
@@ -73,7 +73,7 @@
     //         username: '',
     //         token: ''
     //     }
-        
+
 
     //     this.authenticate = function(loginData) {
     //         var deferred = $q.defer();
@@ -94,7 +94,7 @@
 
     //     this.login = function(loginData) {
     //         return this.authenticate(loginData).then(function() {
-                
+
     //             $state.go('home');
     //         }, function(error) {
     //             authData.username = '';
@@ -102,12 +102,12 @@
     //             alert('Authentication failed');
     //         })
     //     }
-        
+
     //     //   this.verifyUser = function() {
     //     //       var creds = localStorageService.get('AuthorizationData');
     //     //       return creds;
     //     //   }
-        
+
     // })
     // End move to loginController.js
 
